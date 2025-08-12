@@ -32,6 +32,34 @@ length   clientid   command no    1byte msg type   4byte CANID  1byte extended i
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ..................................................11 bit 07e0     ..................................................................................................
 
+main()
+{   
+ 
+ 
+char Client_Connect[] = 0x"0000003c000000000001000043414e46445f49534f31353736353a426175643d3530303030303a4442523d323030303030302c4368616e6e656c3d30";
+    
+char Set_Filter[] = 0x"00000017000000000006000900FFFFFFFFFF000007E800";
+char Set_Flow_Control[] = 0x"0000001B000000000006002200000007E800000007E0000000FFFF";
+char send8byte[]=0x"0000004f000000000003000f000007e000aa1122334455667788bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbcccc";
+//char bulkdata []=0x"00000052000000000003000f000007e000aa1122334455667788aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbcc";
+char disconnect[]=0x"0000000a000000000002";
+int delay=1000;
+transmit (Client_Connect,sizeof(Client_Connect));
+sys.sleep(delay);
+transmit (Set_Filter,sizeof(Set_Filter));
+sys.sleep(delay);
+transmit (Set_Flow_Control,sizeof(Set_Flow_Control));
+sys.sleep(delay);
+transmit (send8byte,sizeof(send8byte));
+sys.sleep(delay);
+//transmit (bulkdata,sizeof(bulkdata));
+sys.sleep(delay);
+ 
+}
+
+
+
+
 ..................................................29 bit 18DA00f1 ...64 bytes ......................................................................................
 main()
 {   
