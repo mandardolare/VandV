@@ -34,27 +34,28 @@ length   clientid   command no    1byte msg type   4byte CANID  1byte extended i
 
 main()
 {   
+char clientconnect[] = 0x"0000003c000000000001000043414e46445f49534f31353736353a426175643d3530303030303a4442523d323030303030302c4368616e6e656c3d31";    //500kb/2mbps  
+char filter[] = 0x"00000017000000000006000900FFFFFFFFFF000007e800";
+char flowcontrol[] = 0x"0000001B000000000006002200000007e800000007e0000000FFFF";
+                           
+//char sendmsg[] = 0x"00000014000000000003000b000007e0001902FF";
+//char sendmsg[] = 0x"00000012000000000003000b000007e01902FF";
+char sendmsg[] = 0x"00000051000000000003000f000007e000aa1122334455667788bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbccccdddd";
+                    
  
- 
-char Client_Connect[] = 0x"0000003c000000000001000043414e46445f49534f31353736353a426175643d3530303030303a4442523d323030303030302c4368616e6e656c3d30";
-    
-char Set_Filter[] = 0x"00000017000000000006000900FFFFFFFFFF000007E800";
-char Set_Flow_Control[] = 0x"0000001B000000000006002200000007E800000007E0000000FFFF";
-char send8byte[]=0x"0000004f000000000003000f000007e000aa1122334455667788bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbcccc";
-//char bulkdata []=0x"00000052000000000003000f000007e000aa1122334455667788aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbcc";
-char disconnect[]=0x"0000000a000000000002";
-int delay=1000;
-transmit (Client_Connect,sizeof(Client_Connect));
+//char sendmsg[] = 0x"00000151 0000 00000003 00 0f 000007e0 00 00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff";
+int delay=500 ;
+//transmit (clientconnect,sizeof(clientconnect));
 sys.sleep(delay);
-transmit (Set_Filter,sizeof(Set_Filter));
 sys.sleep(delay);
-transmit (Set_Flow_Control,sizeof(Set_Flow_Control));
+transmit (filter,sizeof(filter));
 sys.sleep(delay);
-transmit (send8byte,sizeof(send8byte));
+transmit (flowcontrol,sizeof(flowcontrol));
 sys.sleep(delay);
-//transmit (bulkdata,sizeof(bulkdata));
 sys.sleep(delay);
- 
+transmit (sendmsg,sizeof(sendmsg));
+sys.sleep(delay);
+sys.sleep(delay);
 }
 
 
