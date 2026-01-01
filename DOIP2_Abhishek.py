@@ -4,7 +4,8 @@ import time
 HOST = '172.30.1.6'  # Server IP Address
 # HOST = '192.168.0.64'
 PORT = 13400         # Port Number
-
+#put this host ip '172.30.1.6' in laptop ethernet setting ipv4 address while connecting to ethrnet , 
+#in script and laptop both side should be same ip 
 def handle_command(command):
     """ Process received command and return appropriate responses """
     if  len(command) < 14 :  # Ensure minimum length for valid command extraction
